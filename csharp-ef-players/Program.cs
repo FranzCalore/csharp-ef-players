@@ -11,11 +11,16 @@ using(EfPlayersContext db = new EfPlayersContext())
 
     FootballPlayer ThomasMuller= new FootballPlayer() { name="Thomas",surname="Muller",vote=numeroCasualeArrotondato, gameNumber=numeroCasualePartiteGiocate, winNumber=numeroCasualePartiteVinte};
     db.Add(ThomasMuller);
+    Console.WriteLine(ThomasMuller);
     db.SaveChanges();
     Console.WriteLine("Aggiunto");
 
     ThomasMuller.name = "Tom";
     ThomasMuller.surname = "Mueller";
+    Console.WriteLine(ThomasMuller);
+    db.SaveChanges();
+
+    db.Remove(ThomasMuller);
     db.SaveChanges();
 }
 

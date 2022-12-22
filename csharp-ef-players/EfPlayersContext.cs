@@ -10,6 +10,7 @@ namespace csharp_ef_players
     public class EfPlayersContext:DbContext
     {
         DbSet<FootballPlayer> footballPlayers { get; set; }
+        DbSet<Team> teams { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
