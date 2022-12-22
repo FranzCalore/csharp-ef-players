@@ -11,8 +11,8 @@ using csharp_ef_players;
 namespace csharpefplayers.Migrations
 {
     [DbContext(typeof(EfPlayersContext))]
-    [Migration("20221222144924_TentativodiCorrezione")]
-    partial class TentativodiCorrezione
+    [Migration("20221222153221_Prova")]
+    partial class Prova
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,6 @@ namespace csharpefplayers.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("player_Id"));
 
                     b.Property<int>("Team_Id")
-                        .HasColumnType("int")
-                        .HasColumnName("TeamId");
-
-                    b.Property<int>("Team_Id1")
                         .HasColumnType("int");
 
                     b.Property<int>("gameNumber")
@@ -58,7 +54,7 @@ namespace csharpefplayers.Migrations
 
                     b.HasKey("player_Id");
 
-                    b.HasIndex("Team_Id1");
+                    b.HasIndex("Team_Id");
 
                     b.HasIndex("player_Id");
 
@@ -96,13 +92,13 @@ namespace csharpefplayers.Migrations
 
             modelBuilder.Entity("csharp_ef_players.FootballPlayer", b =>
                 {
-                    b.HasOne("csharp_ef_players.Team", "team")
+                    b.HasOne("csharp_ef_players.Team", "Team")
                         .WithMany("listaGiocatori")
-                        .HasForeignKey("Team_Id1")
+                        .HasForeignKey("Team_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("team");
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("csharp_ef_players.Team", b =>

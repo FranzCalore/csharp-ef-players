@@ -14,7 +14,7 @@ namespace csharp_ef_players
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = dbPlayers; Integrated Security = True; Pooling = False;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = dbPlayersprova; Integrated Security = True; Pooling = False;TrustServerCertificate=True");
         }
     }
 }

@@ -31,10 +31,9 @@ namespace csharp_ef_players
         [Required]
         public int winNumber { get; set; }
 
-        [Column("TeamId")]
         public int Team_Id { get; set; }
 
-        public Team team { get; set; }
+        public Team Team { get; set; }
 
 
         public override string ToString()
