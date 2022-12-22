@@ -31,7 +31,6 @@ namespace csharp_ef_players
         [Required]
         public int winNumber { get; set; }
 
-        public int Team_Id { get; set; }
 
         public Team Team { get; set; }
 

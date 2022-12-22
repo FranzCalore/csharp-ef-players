@@ -23,7 +23,7 @@ namespace csharp_ef_players
         [Required]
         public string colori { get; set; }
 
-        public List<FootballPlayer> listaGiocatori { get; set; }
+        public List<FootballPlayer> listaGiocatori { get; set;} = new List<FootballPlayer>() { };
 
     }
 }

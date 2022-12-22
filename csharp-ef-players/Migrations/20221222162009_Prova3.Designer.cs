@@ -11,8 +11,8 @@ using csharp_ef_players;
 namespace csharpefplayers.Migrations
 {
     [DbContext(typeof(EfPlayersContext))]
-    [Migration("20221222153436_Prova2")]
-    partial class Prova2
+    [Migration("20221222162009_Prova3")]
+    partial class Prova3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,9 +35,6 @@ namespace csharpefplayers.Migrations
                     b.Property<int>("Team_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Team_Id1")
-                        .HasColumnType("int");
-
                     b.Property<int>("gameNumber")
                         .HasColumnType("int");
 
@@ -57,7 +54,7 @@ namespace csharpefplayers.Migrations
 
                     b.HasKey("player_Id");
 
-                    b.HasIndex("Team_Id1");
+                    b.HasIndex("Team_Id");
 
                     b.HasIndex("player_Id");
 
@@ -97,7 +94,7 @@ namespace csharpefplayers.Migrations
                 {
                     b.HasOne("csharp_ef_players.Team", "Team")
                         .WithMany("listaGiocatori")
-                        .HasForeignKey("Team_Id1")
+                        .HasForeignKey("Team_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
