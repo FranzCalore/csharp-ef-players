@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace csharp_ef_players
 {
     [Table("FootballPlayer")]
-    [Index(nameof(player_Id))]
+    [Index(nameof(player_Id), IsUnique =true)]
     public class FootballPlayer
     {
         [Key]
@@ -23,7 +23,7 @@ namespace csharp_ef_players
         public string surname { get; set; }
 
         [Required]
-        public int vote { get; set; }
+        public double vote { get; set; }
 
         [Required]
         public int gameNumber { get; set; }

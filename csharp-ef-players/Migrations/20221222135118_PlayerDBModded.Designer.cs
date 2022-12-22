@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using csharp_ef_players;
 
@@ -10,9 +11,11 @@ using csharp_ef_players;
 namespace csharpefplayers.Migrations
 {
     [DbContext(typeof(EfPlayersContext))]
-    partial class EfPlayersContextModelSnapshot : ModelSnapshot
+    [Migration("20221222135118_PlayerDBModded")]
+    partial class PlayerDBModded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,16 +43,15 @@ namespace csharpefplayers.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("vote")
-                        .HasColumnType("float");
+                    b.Property<int>("vote")
+                        .HasColumnType("int");
 
                     b.Property<int>("winNumber")
                         .HasColumnType("int");
 
                     b.HasKey("player_Id");
 
-                    b.HasIndex("player_Id")
-                        .IsUnique();
+                    b.HasIndex("player_Id");
 
                     b.ToTable("FootballPlayer");
                 });
