@@ -10,44 +10,66 @@ using System.Threading.Tasks;
 namespace csharp_ef_players
 {
     [Table("FootballPlayer")]
-    [Index(nameof(player_Id))]
+    [Index(nameof(PlayerId))]
     public class FootballPlayer
     {
         [Key]
-        public int player_Id { get; set; }
+        public int PlayerId { get; set; }
 
         [Required]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public string surname { get; set; }
+        public string Surname { get; set; }
 
         [Required]
-        public double vote { get; set; }
+        public double Vote { get; set; }
 
         [Required]
-        public int gameNumber { get; set; }
+        public int GameNumber { get; set; }
 
         [Required]
-        public int winNumber { get; set; }
+        public int WinNumber { get; set; }
+
+        public int? TeamId { get; set; }
+
+        public Team? Team { get; set; }
 
 
-        public Team Team { get; set; }
+        public FootballPlayer(string name, string surname)
+        {
+            Name = name;
+            Surname = surname;
+            Vote = randomVote();
+            GameNumber = gamenumber(1, 101);
+            WinNumber = gamenumber(1, this.GameNumber);
+        }
 
+        private int gamenumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
+
+        private double randomVote()
+        {
+            Random random = new Random();
+            return Math.Round(random.NextDouble() * 9 + 1 , 1);
+        }
 
         public override string ToString()
         {
-            return player_Id
+            return PlayerId
                 + " " 
-                + name
+                + Name
                 + " "
-                + surname
+                + Surname
                 + "\nvoto Medio: "
-                + vote
+                + Vote
                 + "\nNumero Partite: "
-                + gameNumber
+                + GameNumber
                 + "\nNumero Partite Vinte: "
-                + winNumber;
+                + WinNumber;
         }
     }
 }

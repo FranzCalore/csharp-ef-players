@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using csharp_ef_players;
 
@@ -11,9 +12,11 @@ using csharp_ef_players;
 namespace csharpefplayers.Migrations
 {
     [DbContext(typeof(EfPlayersContext))]
-    partial class EfPlayersContextModelSnapshot : ModelSnapshot
+    [Migration("20221226111815_NuovoDatabase")]
+    partial class NuovoDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace csharpefplayers.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("SponsorTeam", b =>
-                {
-                    b.Property<int>("ListaSponsorSponsorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ListaSponsorSponsorId", "TeamId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("SponsorTeam");
-                });
 
             modelBuilder.Entity("csharp_ef_players.Allenatore", b =>
                 {
@@ -110,29 +98,6 @@ namespace csharpefplayers.Migrations
                     b.ToTable("FootballPlayer");
                 });
 
-            modelBuilder.Entity("csharp_ef_players.Sponsor", b =>
-                {
-                    b.Property<int>("SponsorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SponsorId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Scadenza")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Value")
-                        .HasColumnType("float");
-
-                    b.HasKey("SponsorId");
-
-                    b.ToTable("Sponsors");
-                });
-
             modelBuilder.Entity("csharp_ef_players.Team", b =>
                 {
                     b.Property<int>("TeamId")
@@ -156,21 +121,6 @@ namespace csharpefplayers.Migrations
                     b.HasKey("TeamId");
 
                     b.ToTable("Team");
-                });
-
-            modelBuilder.Entity("SponsorTeam", b =>
-                {
-                    b.HasOne("csharp_ef_players.Sponsor", null)
-                        .WithMany()
-                        .HasForeignKey("ListaSponsorSponsorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("csharp_ef_players.Team", null)
-                        .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("csharp_ef_players.Allenatore", b =>

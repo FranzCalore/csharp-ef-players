@@ -13,17 +13,37 @@ namespace csharp_ef_players
     public class Team
     {
         [Key]
-        public int Team_Id { get; set; }
+        public int TeamId { get; set; }
         [Required]
-        public string name { get; set; }
+        public string Name { get; set; }
         [Required]
-        public string città { get; set; }
+        public string Città { get; set; }
         [Required]
-        public string allenatore { get; set; }
-        [Required]
-        public string colori { get; set; }
+        public string Colori { get; set; }
 
-        public List<FootballPlayer> listaGiocatori { get; set;} = new List<FootballPlayer>() { };
+        public List<FootballPlayer> ListaGiocatori { get; set;} = new List<FootballPlayer>() { };
 
+        public List<Sponsor> ListaSponsor { get; set; } = new List<Sponsor>() { };
+
+        public Allenatore Allenatore { get; set; }
+
+
+
+
+
+        public override string ToString()
+        {
+            string team = this.Name + "\nAllenato da: " + this.Allenatore + "\n\n";
+            foreach (FootballPlayer player in this.ListaGiocatori)
+            {
+                team += "\t";
+                team += player;
+                team += "\n";
+            }
+
+            return team;
+        }
     }
+
+
 }

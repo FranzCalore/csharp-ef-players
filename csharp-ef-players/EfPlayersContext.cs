@@ -9,12 +9,16 @@ namespace csharp_ef_players
 {
     public class EfPlayersContext:DbContext
     {
-        DbSet<FootballPlayer> footballPlayers { get; set; }
-        DbSet<Team> teams { get; set; }
+        public DbSet<FootballPlayer> FootballPlayers { get; set; }
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<Allenatore> Allenatori { get; set; }
+
+        public DbSet<Sponsor> Sponsors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = dbPlayers02; Integrated Security = True; Pooling = False;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = dbPlayers3.0; Integrated Security = True; Pooling = False;TrustServerCertificate=True");
         }
     }
 }

@@ -1,54 +1,53 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using csharp_ef_players;
+using Azure.Identity;
+using Microsoft.EntityFrameworkCore;
 
-using(EfPlayersContext db = new EfPlayersContext())
+
+using (EfPlayersContext db = new EfPlayersContext())
 {
 
-    Team BayernMunchen = new Team() { name = "Bayern Munchen", città = "Monaco di Baviera", allenatore = "Julian Nagelsmann", colori = "Bianco Rosso"};
-    
-    Random random = new Random();
-    double numeroCasualeVoto = random.NextDouble()*10;
-    double numeroCasualeArrotondato = Math.Round(numeroCasualeVoto, 1);
-    int numeroCasualePartiteVinte = random.Next(1, 101);
-    int numeroCasualePartiteGiocate = random.Next(numeroCasualePartiteVinte, 101);
+    Team BayernMunchen = new Team() { Name = "Bayern Munchen", Città = "Monaco di Baviera", Colori = "Bianco Rosso"};
 
-    FootballPlayer ThomasMuller= new FootballPlayer() { name="Thomas",surname="Muller",vote=numeroCasualeArrotondato, gameNumber=numeroCasualePartiteGiocate, winNumber=numeroCasualePartiteVinte};
+    DateTime scadenza1 = DateTime.Parse("01/01/2030");
 
-    numeroCasualeVoto = random.NextDouble() * 10;
-    numeroCasualeArrotondato = Math.Round(numeroCasualeVoto, 1);
-    numeroCasualePartiteVinte = random.Next(1, 101);
-    numeroCasualePartiteGiocate = random.Next(numeroCasualePartiteVinte, 101);
+    DateTime scadenza2 = DateTime.Parse("01/01/2027");
 
-    BayernMunchen.listaGiocatori.Add(ThomasMuller);
+    Sponsor Adidas = new Sponsor("Adidas", 900, scadenza1);
 
-    FootballPlayer AlphonsoDavies = new FootballPlayer() { name = "Alphonso", surname = "Davies", vote = numeroCasualeArrotondato, gameNumber = numeroCasualePartiteGiocate, winNumber = numeroCasualePartiteVinte };
+    Sponsor Telekom = new Sponsor("Telekom", 250, scadenza2);
 
-    numeroCasualeVoto = random.NextDouble() * 10;
-    numeroCasualeArrotondato = Math.Round(numeroCasualeVoto, 1);
-    numeroCasualePartiteVinte = random.Next(1, 101);
-    numeroCasualePartiteGiocate = random.Next(numeroCasualePartiteVinte, 101);
+    BayernMunchen.ListaSponsor.Add(Adidas);
+    BayernMunchen.ListaSponsor.Add(Telekom);
 
-    BayernMunchen.listaGiocatori.Add(AlphonsoDavies);
+    Allenatore JulianNagelsmann = new Allenatore("Julian", "Nagelsmann");
 
-    FootballPlayer JamalMusiala = new FootballPlayer() { name = "Jamal", surname = "Musiala", vote = numeroCasualeArrotondato, gameNumber = numeroCasualePartiteGiocate, winNumber = numeroCasualePartiteVinte };
+    JulianNagelsmann.Team = BayernMunchen;
+    BayernMunchen.Allenatore = JulianNagelsmann;
 
-    BayernMunchen.listaGiocatori.Add(JamalMusiala);
+    FootballPlayer ThomasMuller= new FootballPlayer("Thomas","Muller");
+
+
+    BayernMunchen.ListaGiocatori.Add(ThomasMuller);
+
+    FootballPlayer AlphonsoDavies = new FootballPlayer("Alphonso", "Davies");
+
+    BayernMunchen.ListaGiocatori.Add(AlphonsoDavies);
+
+    FootballPlayer JamalMusiala = new FootballPlayer("Jamal", "Musiala");
+
+    BayernMunchen.ListaGiocatori.Add(JamalMusiala);
 
     db.Add(BayernMunchen);
-    db.Add(ThomasMuller);
-    db.Add(AlphonsoDavies);
-    db.Add(JamalMusiala);
 
-    Console.WriteLine(ThomasMuller);
     db.SaveChanges();
     Console.WriteLine("Aggiunto");
 
-   /* ThomasMuller.name = "Tom";
-    ThomasMuller.surname = "Mueller";
-    Console.WriteLine(ThomasMuller);
-    db.SaveChanges();
+    foreach(Team team in db.Teams)
+    {
+        Console.WriteLine(team);  
+    }
 
-    db.Remove(ThomasMuller);
-    db.SaveChanges();*/
 }
+
 
