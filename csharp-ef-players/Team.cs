@@ -21,7 +21,7 @@ namespace csharp_ef_players
         [Required]
         public string Colori { get; set; }
 
-        public List<FootballPlayer> ListaGiocatori { get; set;} = new List<FootballPlayer>() { };
+        public List<FootballPlayer> ListaGiocatori { get; set; } = new List<FootballPlayer>() { };
 
         public List<Sponsor> ListaSponsor { get; set; } = new List<Sponsor>() { };
 
@@ -33,17 +33,31 @@ namespace csharp_ef_players
 
         public override string ToString()
         {
-            string team = this.Name + "\nAllenato da: " + this.Allenatore + "\n\n";
-            foreach (FootballPlayer player in this.ListaGiocatori)
+            using (EfPlayersContext db = new EfPlayersContext())
             {
-                team += "\t";
-                team += player;
-                team += "\n";
+                Allenatore allenatore=null;
+                foreach(Allenatore coach in db.Allenatori)
+                {
+                    if (coach.TeamId == this.TeamId)
+                    {
+                        allenatore = coach;
+                    }
+                }
+                string team = this.TeamId + " " + this.Name + "\nAllenato da: " + allenatore.ToString() + "\n\n";
+                foreach (FootballPlayer player in db.FootballPlayers)
+                {
+                    if (player.TeamId == this.TeamId)
+                    {
+                        team += "\t";
+                        team += player;
+                        team += "\n";
+                    }
+                }
+
+                return team;
             }
-
-            return team;
         }
+
+
     }
-
-
 }
